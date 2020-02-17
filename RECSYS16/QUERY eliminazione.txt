@@ -1,0 +1,37 @@
+SELECT count(*) FROM interactions WHERE item_id NOT IN (SELECT item_id FROM items JOIN interactions ON id=item_id);
+
+items.id mancanti = 32581
+
+DELETE FROM interactions WHERE interactions.item_id IN (SELECT item_id FROM interactions WHERE item_id NOT IN (SELECT item_id FROM items JOIN interactions ON id=item_id));
+
+
+
+SELECT count(*) FROM interactions WHERE user_id NOT IN (SELECT user_id FROM users JOIN interactions ON id=user_id);
+
+users.id mancanti = 0
+
+DELETE FROM interactions WHERE interactions.user_id IN (SELECT user_id FROM interactions WHERE user_id NOT IN (SELECT user_id FROM users JOIN interactions ON id=user_id));
+
+
+SELECT count(*) FROM impressions WHERE user_id NOT IN (SELECT user_id FROM users JOIN impressions ON users.id=user_id);
+
+users.id mancanti = 3351526
+
+DELETE FROM impressions WHERE impressions.user_id IN (SELECT user_id FROM impressions WHERE user_id NOT IN (SELECT user_id FROM users JOIN impressions ON users.id=user_id));
+
+
+
+
+SELECT count(*) FROM imp_items WHERE imp_id NOT IN (SELECT imp_id FROM imp_items JOIN impressions ON impressions.id=imp_id);
+
+impressions.id mancanti = ?
+
+DELETE FROM imp_items WHERE imp_items.imp_id IN (SELECT imp_id FROM imp_items WHERE imp_id NOT IN (SELECT imp_id FROM imp_items JOIN impressions ON impressions.id=imp_id));
+
+
+
+SELECT count(*) FROM imp_items WHERE item_id NOT IN (SELECT item_id FROM imp_items JOIN items ON items.id=item_id);
+
+items.id mancanti = ?
+
+DELETE FROM imp_items WHERE imp_items.item_id IN (SELECT item_id FROM imp_items WHERE item_id NOT IN (SELECT item_id FROM imp_items JOIN items ON items.id=item_id));
